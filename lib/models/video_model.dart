@@ -1,7 +1,8 @@
 class Video {
   final String id;
   final String title;
-  //final String duration;
+
+  //final String videoCo;
   final String thumbnailUrl;
   final String channelTitle;
 
@@ -23,3 +24,4 @@ class Video {
     );
   }
 }
+

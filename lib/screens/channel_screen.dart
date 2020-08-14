@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:learn_flutter/screens/playlists_screen.dart';
 import 'package:learn_flutter/widgets/channel_info_tile.dart';
 import 'package:learn_flutter/widgets/video_list._tile.dart';
 import '../models/channel_models.dart';
@@ -50,9 +51,23 @@ class _ChannelScreenState extends State<ChannelScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Channel',
+          _channel != null ? _channel.title : '' ,
           style: GoogleFonts.titilliumWeb(fontWeight: FontWeight.bold),
         ),
+        actions: [
+          FlatButton(
+            onPressed: () {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) {
+                return PlayListsScreen(widget.channelId);
+              }));
+            },
+            child: Text(
+              'Playlists',
+              style: GoogleFonts.poppins(color: Colors.white),
+            ),
+          ),
+        ],
       ),
       body: _channel != null
           ? NotificationListener<ScrollNotification>(
@@ -65,15 +80,23 @@ class _ChannelScreenState extends State<ChannelScreen> {
                 }
                 return false;
               },
-              child: ListView.builder(
-                itemCount: 1 + _channel.videos.length,
-                itemBuilder: (BuildContext context, int index) {
-                  if (index == 0) {
-                    return ChannelInfoTile(_channel);
-                  }
-                  Video video = _channel.videos[index - 1];
-                  return VideoListTile(_channel, video);
-                },
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ChannelInfoTile(_channel),
+
+                    Container(
+                      height: 600,
+                      child: ListView.builder(
+                        itemCount: _channel.videos.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          Video video = _channel.videos[index];
+                          return VideoListTile(video);
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
             )
           : Center(

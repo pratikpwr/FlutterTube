@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../models/channel_models.dart';
@@ -5,10 +6,10 @@ import '../models/video_model.dart';
 import '../screens/video_screen.dart';
 
 class VideoListTile extends StatelessWidget {
-  final Channel channel;
+ // final Channel channel;
   final Video video;
 
-  VideoListTile(this.channel, this.video);
+  VideoListTile( this.video);
 
   @override
   Widget build(BuildContext context) {
@@ -32,12 +33,6 @@ class VideoListTile extends StatelessWidget {
                     height: 180,
                     width: MediaQuery.of(context).size.width,
                   ),
-                 /*Container(
-                    decoration:BoxDecoration(
-                      color: Colors.black45
-                    ),
-                    child: Text(video.duration , style: GoogleFonts.poppins(color: Colors.white),),
-                  )*/
                 ],
               ),
               Padding(

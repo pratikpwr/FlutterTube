@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:learn_flutter/models/playlist_model.dart';
 import '../models/channel_models.dart';
 import '../models/video_model.dart';
 import '../utilities/keys.dart';
@@ -43,6 +44,46 @@ class APIService {
     } else {
       throw json.decode(response.body)['error']['message'];
     }
+  }
+
+  Future<List<Playlists>> fetchPlaylists({String channelId}) async {
+    String _nextPlaylistPageToken = '';
+    Map<String, String> parameters = {
+      'part': 'snippet',
+      'channelId': channelId,
+      'maxResults': '30',
+      'pageToken': _nextPlaylistPageToken,
+      'key': API_KEY,
+    };
+    Uri uri = Uri.https(
+      _baseUrl,
+      '/youtube/v3/playlists',
+      parameters,
+    );
+    Map<String, String> headers = {
+      HttpHeaders.contentTypeHeader: 'application/json',
+    };
+
+    var response = await http.get(uri, headers: headers);
+    if (response.statusCode == 200) {
+      var data = json.decode(response.body);
+
+      _nextPlaylistPageToken = data['nextPageToken'] ?? '';
+      List<dynamic> playlistJSON = data['items'];
+
+      List<Playlists> playlists = [];
+      playlistJSON.forEach(
+            (json) => playlists.add(
+          Playlists.fromMap(json),
+        ),
+      );
+
+      return playlists;
+
+    } else {
+      throw json.decode(response.body)['error']['message'];
+    }
+
   }
 
   Future<List<Video>> fetchVideosFromPlaylist({String playlistId}) async {
