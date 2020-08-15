@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:learn_flutter/models/channel_models.dart';
+import '../models/channel_models.dart';
 
 class ChannelInfoTile extends StatelessWidget {
   final Channel _channel;

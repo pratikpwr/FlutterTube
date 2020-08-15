@@ -4,7 +4,7 @@ class Playlists {
   final String description;
   final String thumbnailUrl;
 
-  Playlists({this.id, this.title, this.description , this.thumbnailUrl});
+  Playlists({this.id, this.title, this.description, this.thumbnailUrl});
 
   factory Playlists.fromMap(Map<String, dynamic> map) {
     return Playlists(

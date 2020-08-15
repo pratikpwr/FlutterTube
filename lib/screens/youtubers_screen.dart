@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:learn_flutter/colors.dart';
 import '../widgets/youtube_grid_tile.dart';
 
 class YouTubersScreen extends StatefulWidget {

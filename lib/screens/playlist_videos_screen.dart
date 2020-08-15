@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:learn_flutter/models/video_model.dart';
-import 'package:learn_flutter/services/api_service.dart';
-import 'package:learn_flutter/widgets/video_list._tile.dart';
+import '../models/video_model.dart';
+import '../services/api_service.dart';
+import '../widgets/video_list._tile.dart';
 
 class PlaylistVideoScreen extends StatefulWidget {
   final String playlistId;
@@ -33,7 +33,7 @@ class _PlaylistVideoScreenState extends State<PlaylistVideoScreen> {
   _loadMoreVideos() async {
     _isLoading = true;
     List<Video> moreVideos = await APIService.instance
-        .fetchVideosFromPlaylist(playlistId:widget.playlistId);
+        .fetchVideosFromPlaylist(playlistId: widget.playlistId);
     List<Video> allVideos = _videos..addAll(moreVideos);
     setState(() {
       _videos = allVideos;
@@ -47,23 +47,25 @@ class _PlaylistVideoScreenState extends State<PlaylistVideoScreen> {
       appBar: AppBar(
         title: Text('PlayLists Videos'),
       ),
-      body:_videos == null ? Center(
-        child: CircularProgressIndicator(),
-      ): NotificationListener<ScrollNotification>(
-        onNotification: (ScrollNotification scrollDetails) {
-          if (!_isLoading &&
-              scrollDetails.metrics.pixels ==
-                  scrollDetails.metrics.maxScrollExtent) {
-            _loadMoreVideos();
-          }
-          return false;
-        },
-        child: ListView.builder(
-            itemCount: _videos.length,
-            itemBuilder: (context, index) {
-              return VideoListTile(_videos[index]);
-            }),
-      ),
+      body: _videos == null
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : NotificationListener<ScrollNotification>(
+              onNotification: (ScrollNotification scrollDetails) {
+                if (!_isLoading &&
+                    scrollDetails.metrics.pixels ==
+                        scrollDetails.metrics.maxScrollExtent) {
+                  _loadMoreVideos();
+                }
+                return false;
+              },
+              child: ListView.builder(
+                  itemCount: _videos.length,
+                  itemBuilder: (context, index) {
+                    return VideoListTile(_videos[index]);
+                  }),
+            ),
     );
   }
 }

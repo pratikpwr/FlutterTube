@@ -1,15 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../models/channel_models.dart';
 import '../models/video_model.dart';
 import '../screens/video_screen.dart';
 
 class VideoListTile extends StatelessWidget {
- // final Channel channel;
+  // final Channel channel;
   final Video video;
 
-  VideoListTile( this.video);
+  VideoListTile(this.video);
 
   @override
   Widget build(BuildContext context) {

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:learn_flutter/models/channel_models.dart';
-import 'package:learn_flutter/models/playlist_model.dart';
-import 'package:learn_flutter/screens/playlist_videos_screen.dart';
-import 'package:learn_flutter/services/api_service.dart';
+import '../models/playlist_model.dart';
+import '../screens/playlist_videos_screen.dart';
+import '../services/api_service.dart';
 
 class PlayListsScreen extends StatefulWidget {
   final String channelId;
@@ -16,7 +15,7 @@ class PlayListsScreen extends StatefulWidget {
 
 class _PlayListsScreenState extends State<PlayListsScreen> {
   List<Playlists> _playlists;
-  bool _isLoading = false;
+ // bool _isLoading = false;
 
   @override
   void initState() {
@@ -46,17 +45,15 @@ class _PlayListsScreenState extends State<PlayListsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Playlists'),
-      ),
       body: _playlists == null
           ? Center(child: CircularProgressIndicator())
           : ListView.builder(
               itemCount: _playlists.length,
               itemBuilder: (BuildContext context, int index) {
                 return GestureDetector(
-                  onTap: (){
-                    Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                  onTap: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) {
                       return PlaylistVideoScreen(_playlists[index].id);
                     }));
                   },

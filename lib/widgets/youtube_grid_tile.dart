@@ -1,9 +1,8 @@
 import 'package:google_fonts/google_fonts.dart';
-import 'package:learn_flutter/colors.dart';
-import 'package:learn_flutter/models/channel_models.dart';
+import '../models/channel_models.dart';
 import 'package:flutter/material.dart';
-import 'package:learn_flutter/screens/channel_screen.dart';
-import 'package:learn_flutter/services/api_service.dart';
+import '../screens/channel_screen.dart';
+import '../services/api_service.dart';
 
 class YoutubeGridTile extends StatefulWidget {
   final String channelId;

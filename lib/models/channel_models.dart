@@ -23,8 +23,6 @@ class Channel {
     this.videos,
   });
 
-
-
   factory Channel.fromMap(Map<String, dynamic> map) {
     return Channel(
       id: map['id'],
@@ -38,5 +36,3 @@ class Channel {
     );
   }
 }
-
-

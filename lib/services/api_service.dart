@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:learn_flutter/models/playlist_model.dart';
+import '../models/playlist_model.dart';
 import '../models/channel_models.dart';
 import '../models/video_model.dart';
 import '../utilities/keys.dart';
-
 
 class APIService {
   APIService._instantiate();
@@ -73,17 +72,15 @@ class APIService {
 
       List<Playlists> playlists = [];
       playlistJSON.forEach(
-            (json) => playlists.add(
+        (json) => playlists.add(
           Playlists.fromMap(json),
         ),
       );
 
       return playlists;
-
     } else {
       throw json.decode(response.body)['error']['message'];
     }
-
   }
 
   Future<List<Video>> fetchVideosFromPlaylist({String playlistId}) async {
@@ -114,7 +111,7 @@ class APIService {
       // Fetch first eight videos from uploads playlist
       List<Video> videos = [];
       videosJson.forEach(
-            (json) => videos.add(
+        (json) => videos.add(
           Video.fromMap(json['snippet']),
         ),
       );
@@ -123,5 +120,4 @@ class APIService {
       throw json.decode(response.body)['error']['message'];
     }
   }
-
 }
