@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:learn_flutter/models/favorite_model.dart';
+import 'package:provider/provider.dart';
 import '../models/video_model.dart';
 import '../screens/video_screen.dart';
 
@@ -31,6 +33,31 @@ class VideoListTile extends StatelessWidget {
                     height: 180,
                     width: MediaQuery.of(context).size.width,
                   ),
+                  Positioned(
+                    right: 8,
+                    top: 8,
+                    child: GestureDetector(
+                      onTap: () {
+                        Provider.of<Favorite>(context, listen: false)
+                            .addOrRemove(video);
+                      },
+                      child: Container(
+                        padding: EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.black45),
+                        child: Consumer<Video>(
+                          builder: (context, video, child) {
+                            return Icon(
+                              video.isFavorite == false
+                                  ? Icons.favorite_border
+                                  : Icons.favorite,
+                              color: Colors.white,
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
               Padding(

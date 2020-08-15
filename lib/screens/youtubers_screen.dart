@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learn_flutter/screens/favorites_screen.dart';
 import '../widgets/youtube_grid_tile.dart';
 
 class YouTubersScreen extends StatefulWidget {
@@ -58,6 +59,19 @@ class _YouTubersScreenState extends State<YouTubersScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Youtubers'),
+        actions: [
+          FlatButton(
+              onPressed: () {
+                return Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) {
+                  return FavoritesScreen();
+                }));
+              },
+              child: Icon(
+                Icons.favorite,
+                color: Colors.white,
+              ))
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(

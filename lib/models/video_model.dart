@@ -1,10 +1,13 @@
-class Video {
+import 'package:flutter/material.dart';
+
+class Video with ChangeNotifier {
   final String id;
   final String title;
 
   //final String videoCo;
   final String thumbnailUrl;
   final String channelTitle;
+  bool isFavorite;
 
   Video({
     this.id,
@@ -12,6 +15,7 @@ class Video {
     //this.duration,
     this.thumbnailUrl,
     this.channelTitle,
+    this.isFavorite = false,
   });
 
   factory Video.fromMap(Map<String, dynamic> snippet) {
@@ -22,5 +26,10 @@ class Video {
       thumbnailUrl: snippet['thumbnails']['high']['url'],
       channelTitle: snippet['channelTitle'],
     );
+  }
+
+  void toggleFavoriteStatus() {
+    isFavorite = !isFavorite;
+    notifyListeners();
   }
 }
