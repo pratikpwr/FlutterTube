@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:stepupdev/screens/favorites_screen.dart';
+import 'package:stepupdev/models/tech_model.dart';
 import '../widgets/youtube_grid_tile.dart';
 
 class YouTubersScreen extends StatefulWidget {
-  final List<String> youtubeChannels;
+  final TechModel tech;
 
-  YouTubersScreen(this.youtubeChannels);
+  YouTubersScreen(this.tech);
 
   @override
   _YouTubersScreenState createState() => _YouTubersScreenState();
@@ -16,20 +16,7 @@ class _YouTubersScreenState extends State<YouTubersScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Youtubers'),
-        actions: [
-          FlatButton(
-              onPressed: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) {
-                  return FavoritesScreen();
-                }));
-              },
-              child: Icon(
-                Icons.favorite,
-                color: Colors.white,
-              ))
-        ],
+        title: Text(widget.tech.title),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -44,9 +31,9 @@ class _YouTubersScreenState extends State<YouTubersScreen> {
                       childAspectRatio: 0.78,
                       crossAxisSpacing: 8,
                       mainAxisSpacing: 4),
-                  itemCount: widget.youtubeChannels.length,
+                  itemCount: widget.tech.channels!.length,
                   itemBuilder: (context, index) {
-                    return YoutubeGridTile(widget.youtubeChannels[index]);
+                    return YoutubeGridTile(widget.tech.channels![index]);
                   }),
             )
           ],

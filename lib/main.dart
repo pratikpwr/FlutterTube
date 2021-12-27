@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:stepupdev/models/favorite_model.dart';
+import 'package:stepupdev/models/tech_model.dart';
 import 'package:stepupdev/models/video_model.dart';
-import 'package:stepupdev/services/channels_data.dart';
+import 'package:stepupdev/screens/techs_screen.dart';
 import './screens/youtubers_screen.dart';
 import './colors.dart';
 
@@ -33,7 +34,7 @@ class MyApp extends StatelessWidget {
                     color: MyColors.black,
                     fontSize: 24,
                     fontWeight: FontWeight.bold))),
-        home: YouTubersScreen(flutterChannels),
+        home: TechScreen(),
       ),
     );
   }
